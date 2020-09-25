@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+    db:
+        image: mariadb
+        restart: always
+        
+    app:
+        build: 
+            context: .
+            dockerfile: Dockerfile.prod
+        depends_on: 
+            - db
+
+volumes: 
+    fischbot_db:
