@@ -13,6 +13,7 @@ services:
             dockerfile: Dockerfile.dev
         environment:
             NODE_ENV: dev
+            
         volumes: 
             - "./:/usr/src/app"
 

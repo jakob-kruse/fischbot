@@ -9,6 +9,9 @@ services:
         build: 
             context: .
             dockerfile: Dockerfile.prod
+        environment:
+            APP__TELEGRAM_TOKEN: ${APP__TELEGRAM_TOKEN}
+            APP__PORT: ${APP__PORT}
         depends_on: 
             - db
 

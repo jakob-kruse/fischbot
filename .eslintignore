@@ -1,0 +1,11 @@
+yarn.lock
+yarn-error.log
+tsconfig.json
+node_modules/
+Dockerfile*
+docker-compose.*
+dist/
+bin/
+.vscode
+.github/
+.env
