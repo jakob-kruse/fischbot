@@ -1,19 +1,18 @@
 {
   "name": "fischbot",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "A Telegram Bot",
   "main": "dist/app.js",
-  "repository": "https://github.com/jakob-kruse/fischtisch_botv2.git",
+  "repository": "https://github.com/jakob-kruse/fischbot",
   "author": "Jakob Kruse <jakob.kruse@tuta.io>",
   "license": "MIT",
-  "private": true,
   "scripts": {
-    "start:prod": "tsc && node dist/app.js",
-    "start:dev": "nodemon src/app.ts",
-    "docker:start:dev": "bash bin/docker:dev.sh",
-    "docker:start:prod": "bash bin/docker:prod.sh",
+    "run:prod": "node -r tsconfig-paths/register -r ts-node/register ./src/app.ts",
+    "run:dev": "nodemon",
+    "dev": "bash bin/docker:dev.sh",
+    "prod": "bash bin/docker:prod.sh",
     "lint": "eslint '*/**/*.{js,ts,tsx}'",
-    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint:fix": "eslint '*/**/*.{js,ts,tsx}' --fix"
   },
   "husky": {
     "hooks": {
@@ -26,7 +25,14 @@
     ]
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/connect-redis": "^0.0.14",
+    "@types/crypto-random-string": "^2.0.0",
+    "@types/express-session": "^1.17.0",
     "@types/node": "^14.11.2",
+    "@types/passport": "^1.0.4",
+    "@types/passport-twitter": "^1.0.36",
+    "@types/redis": "^2.8.27",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "eslint": "^7.9.0",
@@ -37,8 +43,22 @@
     "ts-node": "^9.0.0"
   },
   "dependencies": {
-    "fastify": "^3.4.1",
+    "@types/express": "^4.17.8",
+    "axios": "^0.20.0",
+    "connect-redis": "^5.0.0",
+    "crypto-random-string": "^3.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-twitter": "^1.0.4",
+    "redis": "^3.0.2",
+    "reflect-metadata": "^0.1.13",
     "telegraf": "^3.38.0",
+    "tsconfig-paths": "^3.9.0",
+    "tslib": "^2.0.1",
+    "typeorm": "^0.2.26",
     "typescript": "^4.0.3"
   }
 }

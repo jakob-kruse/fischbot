@@ -4,4 +4,4 @@ if [ ! -f "docker-compose.dev.yml" ];
     exit 1;
 fi;
 
-APP_ENV=dev docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans $@;
+APP_ENV=development docker-compose -f docker-compose.yml -f docker-compose.dev.yml up --build --remove-orphans $@;
