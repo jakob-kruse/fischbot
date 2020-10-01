@@ -1,19 +1,64 @@
 version: "3"
 
 services:
+    redis:
+        container_name: FischbotRedis
+        image: redis:alpine
+        restart: always
+        ports:
+            - $REDIS__PORT:$REDIS__PORT
+        volumes:
+            - fischbot_redis:/var/lib/redis
+
     db:
+        container_name: FischbotDB
         image: mariadb
         restart: always
-        
+        environment:
+            MYSQL_DATABASE: $DB__NAME
+            MYSQL_USER: $DB__USER
+            MYSQL_PASSWORD: $DB__PASSWORD
+            MYSQL_ROOT_PASSWORD: $DB__ROOT_PASSWORD
+        ports:
+            - "$DB__PORT:$DB__PORT"
+        volumes: 
+            - fischbot_db:/var/lib/mysql
+
     app:
+        container_name: FischbotApp
+        restart: always
         build: 
             context: .
-            dockerfile: Dockerfile.prod
+            dockerfile: Dockerfile
+        ports: 
+            - $APP__PORT:$APP__PORT
+        expose:
+            - $APP__PORT
+        
         environment:
-            APP__TELEGRAM_TOKEN: ${APP__TELEGRAM_TOKEN}
-            APP__PORT: ${APP__PORT}
+            NODE_ENV: production
+            
+            APP__TELEGRAM_TOKEN: $APP__TELEGRAM_TOKEN
+
+            APP__TWITTER_CONSUMER_TOKEN: $APP__TWITTER_CONSUMER_TOKEN
+            APP__TWITTER_CONSUMER_TOKEN_SECRET: $APP__TWITTER_CONSUMER_TOKEN_SECRET
+            APP__TWITTER_CALLBACK_URL: $APP__TWITTER_CALLBACK_URL
+
+            APP__HOST: $APP__HOST
+            APP__PORT: $APP__PORT
+            DB__HOST: db
+            DB__PORT: $DB__PORT
+            DB__USER: $DB__USER
+            DB__PASSWORD: $DB__PASSWORD
+            DB__NAME: $DB__NAME
+            
+            REDIS__PORT: $REDIS__PORT
+            REDIS__HOST: redis
+            REDIS__SECRET: $REDIS__SECRET
         depends_on: 
             - db
+            - redis
 
 volumes: 
     fischbot_db:
+    fischbot_redis:

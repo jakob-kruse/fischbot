@@ -2,8 +2,6 @@ FROM node:14.11.0-stretch-slim
 
 WORKDIR /usr/src/app
 
-ENV NODE_ENV production
-
 COPY package.json ./
 COPY yarn.lock ./
 
@@ -11,4 +9,4 @@ RUN [ "yarn", "install", "--check-files", "--frozen-lockfile" ]
 
 ADD . .
 
-CMD [ "yarn", "start:prod" ]
+CMD [ "yarn", "run:prod" ]
